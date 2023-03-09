@@ -44,8 +44,8 @@ const Login = () => {
 
   return (
     <>
-      <animated.div className="Login" style={fadeIn}>
-        <section>
+      <div className="Login" >
+        <animated.section style={fadeIn}>
           <p
             ref={errRef}
             className={errMsg ? "errmsg" : "offscreen"}
@@ -88,8 +88,8 @@ const Login = () => {
               <a href="#">Forget Password</a>
             </span>
           </p>
-        </section>
-      </animated.div>
+        </animated.section>
+      </div>
     </>
   );
 };
