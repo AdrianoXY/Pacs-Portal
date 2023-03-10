@@ -44,7 +44,7 @@ const Login = () => {
 
   return (
     <>
-      <div className="Login" >
+      <div className="Login">
         <animated.section style={fadeIn}>
           <p
             ref={errRef}
