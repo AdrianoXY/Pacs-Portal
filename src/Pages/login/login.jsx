@@ -1,8 +1,8 @@
-import React from "react";
-import { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSpring, animated } from "react-spring";
 import "./component/login.css";
+import axios from "../../api/axios.jsx";
 
 const Login = () => {
   const userRef = useRef();
@@ -23,11 +23,27 @@ const Login = () => {
   }, [user, pwd]);
 
   const handleSubmit = async (e) => {
-    // e.preventDefault();
-    setUser("");
-    setPwd("");
-    setSuccess(true);
-    navigate("/home");
+    e.preventDefault();
+    axios.post('/Login', 
+    JSON.stringify({ user, pwd })
+      ).then(response =>{
+        setSuccess(true);
+        navigate('/home')
+      })
+      .catch(err => {
+        if(!err?.response){
+          setErrMsg('No Server Response')
+        }else if (err.response?.status === 401){
+          setErrMsg('Account does not exist')
+        }else if (err.response?.status === 402){
+          setErrMsg('Wrong Password')
+        }else if (err.response?.status === 403){
+          setErrMsg('Must not be null')
+        }else {
+          setErrMsg('Login Failed');
+        }
+        errRef.current.focus();
+      })
   };
 
   // const [style, animate] = useSpring(() => ({
@@ -57,7 +73,7 @@ const Login = () => {
           <form onSubmit={handleSubmit}>
             <label htmlFor="username">Account</label>
             <input
-              type="text"
+              type="account"
               id="username"
               ref={userRef}
               autoComplete="off"
@@ -81,11 +97,11 @@ const Login = () => {
           <p>
             Need an account?
             <span className="line">
-              <a href="#">Sign up</a>
+              <a href="/signup">Sign up</a>
             </span>
             <br />
             <span className="line">
-              <a href="#">Forget Password</a>
+              <a href="/forget">Forget Password</a>
             </span>
           </p>
         </animated.section>

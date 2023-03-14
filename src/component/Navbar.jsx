@@ -16,7 +16,7 @@ function Navbar() {
     setPath(location.pathname);
   }, [location]);
 
-  if (path != "/")
+  if (path != "/" && path != "/signup" && path != "/forget")
     return (
       <>
         <IconContext.Provider value={{ color: "#fff" }}>

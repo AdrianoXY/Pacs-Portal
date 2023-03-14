@@ -2,7 +2,6 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import {
-  BrowserRouter,
   RouterProvider,
   createBrowserRouter,
   Outlet,
@@ -14,6 +13,8 @@ import Dashboard from "./Pages/Dashboard/Dashboard.jsx";
 import Search from "./Pages/Search/Search.jsx";
 import Manage from "./Pages/Manage/Manage.jsx";
 import Payment from "./Pages/Payment/Payment.jsx";
+import Signup from "./Pages/login/signup.jsx";
+import Forget from "./Pages/login/forget.jsx";
 
 const AppLayout = () => (
   <>
@@ -29,6 +30,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Login />,
+      },
+      {
+        path: "/signup",
+        element: <Signup />,
+      },
+      {
+        path: "/forget",
+        element: <Forget />,
       },
       {
         path: "/home",
@@ -55,5 +64,5 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
+    <RouterProvider router={router} />
 );
